@@ -78,7 +78,7 @@ services:
       BASE_URL: https://pms-dev-lasers4eu.stfc.ac.uk
       NODE_ENV: development
       USER_OFFICE_FACTORY_ENDPOINT: http://factory:4500/generate
-      AUTH_DISCOVERY_URL: https://pms-dev-lasers4eu.stfc.ac.uk:5001/.well-known/openid-configuration
+      AUTH_DISCOVERY_URL: http://pms-dev-lasers4eu.stfc.ac.uk:5001/.well-known/openid-configuration
       AUTH_CLIENT_ID: useroffice
       AUTH_CLIENT_SECRET: useroffice
       TZ: Europe/Stockholm
