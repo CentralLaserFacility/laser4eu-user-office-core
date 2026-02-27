@@ -31,7 +31,7 @@ services:
       - '5432:5432'
     volumes:
       - ./apps/backend/db_patches/:/docker-entrypoint-initdb.d/
-      - ./pgdata:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
   factory:
     image: 'ghcr.io/userofficeproject/user-office-factory:develop'
@@ -99,3 +99,6 @@ services:
       - 'traefik.http.routers.authserver.rule=(PathPrefix(`/interaction`) || PathPrefix(`/session`) || PathPrefix(`/auth`))'
     depends_on:
       - db
+
+volumes:
+  postgres_data:
