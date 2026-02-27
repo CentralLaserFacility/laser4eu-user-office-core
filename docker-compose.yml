@@ -2,19 +2,27 @@ services:
   proxy:
     image: traefik:2.10
     command:
+      # Traefik logs and providers
+      - '--log.level=INFO'
       - '--api.insecure=true'
       - '--providers.docker=true'
       - '--providers.docker.exposedbydefault=false'
+      - '--providers.file.filename=/etc/traefik/traefik-certs.yml'  # file provider for certs
+
+      # Entrypoints
       - '--entrypoints.web.address=:80'
       - '--entrypoints.websecure.address=:443'
+      
+      # Enable TLS on websecure
       - '--entrypoints.websecure.http.tls=true'
+      
     ports:
       - '80:80'
       - '443:443'
-      - '8080:8080'
+      - '8080:8080' # Traefik dashboard
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./certs:/certs:ro   # folder containing your .cer and .key
+      - ./certs:/certs:ro                    # your .cer and .key files
       - ./traefik-certs.yml:/etc/traefik/traefik-certs.yml:ro
     labels:
       - 'traefik.enable=true'
@@ -67,10 +75,10 @@ services:
       DATABASE_URL: postgres://duouser:duopassword@db:5432/duo
       JWT_SECRET: qMyLZALzs229ybdQXNyzYRdju7X784TH
       JWT_TOKEN_LIFE: 7d
-      BASE_URL: http://pms-dev-lasers4eu.stfc.ac.uk
+      BASE_URL: https://pms-dev-lasers4eu.stfc.ac.uk
       NODE_ENV: development
       USER_OFFICE_FACTORY_ENDPOINT: http://factory:4500/generate
-      AUTH_DISCOVERY_URL: http://pms-dev-lasers4eu.stfc.ac.uk:5001/.well-known/openid-configuration
+      AUTH_DISCOVERY_URL: https://pms-dev-lasers4eu.stfc.ac.uk:5001/.well-known/openid-configuration
       AUTH_CLIENT_ID: useroffice
       AUTH_CLIENT_SECRET: useroffice
       TZ: Europe/Stockholm
@@ -94,7 +102,7 @@ services:
     ports:
       - 5001:5001
     environment:
-      ISSUER: http://pms-dev-lasers4eu.stfc.ac.uk
+      ISSUER: https://pms-dev-lasers4eu.stfc.ac.uk
       DATABASE_URL: postgres://duouser:duopassword@db:5432/duo
       PORT: 5001
     labels:
