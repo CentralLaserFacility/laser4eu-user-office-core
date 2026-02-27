@@ -1,25 +1,28 @@
 services:
-  # used to proxy the core UI FE and BE requests to the right container
-  # Core FE is accessible on localhost:33000/
-  # Core BE is accessible on localhost:33000/graphql
   proxy:
-    image: traefik:2.10 # The official Traefik docker image
+    image: traefik:2.10
     command:
-      #- "--log.level=DEBUG"
       - '--api.insecure=true'
       - '--providers.docker=true'
       - '--providers.docker.exposedbydefault=false'
       - '--entrypoints.web.address=:80'
+      - '--entrypoints.websecure.address=:443'
+      - '--entrypoints.websecure.http.tls=true'
+      - '--entrypoints.websecure.http.tls.certresolver=manual'
     ports:
-      - '80:80' # The HTTP port
-      - '8080:8080' # The Web UI (enabled by --api)
+      - '80:80'
+      - '443:443'
+      - '8080:8080'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./certs:/certs:ro   # folder containing your .cer and .key
+      - ./traefik-certs.yml:/etc/traefik/traefik-certs.yml:ro
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.routers.traefik.rule=Host(`pms-dev-lasers4eu.stfc.ac.uk`)'
-      - 'traefik.http.routers.traefik.entrypoints=web'
+      - 'traefik.http.routers.traefik.entrypoints=websecure'
       - 'traefik.http.routers.traefik.service=api@internal'
+
   db:
     image: postgres:16-alpine
     restart: always
@@ -54,6 +57,8 @@ services:
       - 'traefik.enable=true'
       - 'traefik.http.services.frontend.loadbalancer.server.port=8080'
       - 'traefik.http.routers.frontend.rule=(Host(`pms-dev-lasers4eu.stfc.ac.uk`) && PathPrefix(`/`))'
+      - 'traefik.http.routers.frontend.entrypoints=websecure'
+      - 'traefik.http.routers.frontend.tls=true'
     depends_on:
       - backend
 
@@ -72,11 +77,12 @@ services:
       TZ: Europe/Stockholm
       DATE_FORMAT: dd-MM-yyyy
       DATE_TIME_FORMAT: dd-MM-yyyy HH:mm
-      # INITIAL_USER_OFFICER_EMAIL: 
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.services.backend.loadbalancer.server.port=4000'
       - 'traefik.http.routers.backend.rule=(Host(`pms-dev-lasers4eu.stfc.ac.uk`) && PathPrefix(`/api`, `/preview`, `/downloads`, `/files`, `/download`, `/uploads`, `/graphql`))'
+      - 'traefik.http.routers.backend.entrypoints=websecure'
+      - 'traefik.http.routers.backend.tls=true'
     depends_on:
       - duo-development-authorization-server
       - db
@@ -95,8 +101,9 @@ services:
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.services.authserver.loadbalancer.server.port=5001'
-      - 'traefik.http.routers.authserver.rule=Host(`pms-dev-lasers4eu.stfc.ac.uk`)'
       - 'traefik.http.routers.authserver.rule=(PathPrefix(`/interaction`) || PathPrefix(`/session`) || PathPrefix(`/auth`))'
+      - 'traefik.http.routers.authserver.entrypoints=websecure'
+      - 'traefik.http.routers.authserver.tls=true'
     depends_on:
       - db
 

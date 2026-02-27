@@ -1,0 +1,4 @@
+tls:
+  certificates:
+    - certFile: /certs/pms-dev-lasers4eu_stfc_ac_uk_cert.cer
+      keyFile: /certs/pms-dev-lasers4eu.stfc.ac.uk.key
