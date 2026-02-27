@@ -8,7 +8,6 @@ services:
       - '--entrypoints.web.address=:80'
       - '--entrypoints.websecure.address=:443'
       - '--entrypoints.websecure.http.tls=true'
-      - '--entrypoints.websecure.http.tls.certresolver=manual'
     ports:
       - '80:80'
       - '443:443'
