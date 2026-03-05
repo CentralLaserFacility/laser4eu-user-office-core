@@ -12,6 +12,11 @@ services:
       # Entrypoints
       - '--entrypoints.web.address=:80'
       - '--entrypoints.websecure.address=:443'
+
+      # HTTP to HTTPS redirection
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
       
       # Enable TLS on websecure
       - '--entrypoints.websecure.http.tls=true'
