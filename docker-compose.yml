@@ -7,17 +7,17 @@ services:
       - '--api.insecure=true'
       - '--providers.docker=true'
       - '--providers.docker.exposedbydefault=false'
-      - '--providers.file.filename=/etc/traefik/traefik-certs.yml'  # file provider for certs
+      - '--providers.file.filename=/etc/traefik/traefik-certs.yml'
 
       # Entrypoints
       - '--entrypoints.web.address=:80'
       - '--entrypoints.websecure.address=:443'
 
-      # HTTP to HTTPS redirection
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
-      
+      # HTTP → HTTPS redirect
+      - '--entrypoints.web.http.redirections.entryPoint.to=websecure'
+      - '--entrypoints.web.http.redirections.entryPoint.scheme=https'
+      - '--entrypoints.web.http.redirections.entryPoint.permanent=true'
+
       # Enable TLS on websecure
       - '--entrypoints.websecure.http.tls=true'
       
@@ -113,7 +113,7 @@ services:
     labels:
       - 'traefik.enable=true'
       - 'traefik.http.services.authserver.loadbalancer.server.port=5001'
-      - 'traefik.http.routers.authserver.rule=(PathPrefix(`/interaction`) || PathPrefix(`/session`) || PathPrefix(`/auth`))'
+      - 'traefik.http.routers.authserver.rule=Host(`pms-dev-lasers4eu.stfc.ac.uk`) && (PathPrefix(`/interaction`) || PathPrefix(`/session`) || PathPrefix(`/auth`) || PathPrefix(`/.well-known`))'
       - 'traefik.http.routers.authserver.entrypoints=websecure'
       - 'traefik.http.routers.authserver.tls=true'
     depends_on:
