@@ -7,11 +7,11 @@ BEGIN
         INSERT INTO users (
             user_title, firstname, lastname, preferredname,
             oidc_sub, oauth_refresh_token, oauth_issuer,
-            email, email_verified, placeholder
+            email, placeholder
         ) VALUES (
             'Ms.', 'Julia', 'Michel', 'Julia',
             'julia.michel.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
-            'JM@lasers4EU.proposal.demo', true, false
+            'JM@lasers4EU.proposal.demo', false
         );
 
         INSERT INTO role_user (role_id, user_id)
@@ -21,11 +21,11 @@ BEGIN
         INSERT INTO users (
             user_title, firstname, lastname, preferredname,
             oidc_sub, oauth_refresh_token, oauth_issuer,
-            email, email_verified, placeholder
+            email, placeholder
         ) VALUES (
             'Ms.', 'Sylvie', 'Jacquemot', 'Sylvie',
             'sylvie.jacquemot.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
-            'SJ@lasers4EU.proposal.demo', true, false
+            'SJ@lasers4EU.proposal.demo', false
         );
 
         INSERT INTO role_user (role_id, user_id)
@@ -35,11 +35,11 @@ BEGIN
         INSERT INTO users (
             user_title, firstname, lastname, preferredname,
             oidc_sub, oauth_refresh_token, oauth_issuer,
-            email, email_verified, placeholder
+            email, placeholder
         ) VALUES (
             'Mr.', 'Chris', 'Gregory', 'Chris',
             'christopher.gregory.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
-            'christopher.gregory@stfc.ac.uk', true, false
+            'christopher.gregory@stfc.ac.uk', false
         );
 
         INSERT INTO role_user (role_id, user_id)
@@ -49,11 +49,11 @@ BEGIN
         INSERT INTO users (
             user_title, firstname, lastname, preferredname,
             oidc_sub, oauth_refresh_token, oauth_issuer,
-            email, email_verified, placeholder
+            email, placeholder
         ) VALUES (
             'Mr.', 'Lasers4EU', 'Admin', 'L4EU Admin',
             'l4eu.officer.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
-            'User_Officer@lasers4EU.proposal.demo', true, false
+            'User_Officer@lasers4EU.proposal.demo', false
         );
 
         INSERT INTO role_user (role_id, user_id)
