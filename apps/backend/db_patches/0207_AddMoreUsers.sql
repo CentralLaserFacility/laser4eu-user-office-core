@@ -5,19 +5,13 @@ BEGIN
 
         -- Julia Michel | role: user
         INSERT INTO users (
-            user_title, firstname, middlename, lastname,
-            username, password, preferredname,
-            oidc_sub, oauth_refresh_token, oauth_access_token, oauth_issuer,
-            gender, nationality, birthdate,
-            organisation, department, organisation_address, position,
-            email, email_verified, telephone, telephone_alt
+            user_title, firstname, lastname, preferredname,
+            oidc_sub, oauth_refresh_token, oauth_issuer,
+            email, email_verified, placeholder
         ) VALUES (
-            'Ms.', 'Julia', '', 'Michel',
-            'julia.michel', '$2a$10$1svMW3/FwE5G1BpE7/CPW.aMyEymEBeWK4tSTtABbsoo/KaSQ.vwm', 'Julia',
-            'julia.michel.oauthsub', 'dummy-refresh-token', 'dummy-access-token', 'dummy-issuer',
-            'female', 'French', '1990-01-01',
-            'Lasers4EU', 'Research', 'Lasers4EU HQ', 'Researcher',
-            'JM@lasers4EU.proposal.demo', true, '', ''
+            'Ms.', 'Julia', 'Michel', 'Julia',
+            'julia.michel.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
+            'JM@lasers4EU.proposal.demo', true, false
         );
 
         INSERT INTO role_user (role_id, user_id)
@@ -25,19 +19,13 @@ BEGIN
 
         -- Sylvie Jacquemot | role: user
         INSERT INTO users (
-            user_title, firstname, middlename, lastname,
-            username, password, preferredname,
-            oidc_sub, oauth_refresh_token, oauth_access_token, oauth_issuer,
-            gender, nationality, birthdate,
-            organisation, department, organisation_address, position,
-            email, email_verified, telephone, telephone_alt
+            user_title, firstname, lastname, preferredname,
+            oidc_sub, oauth_refresh_token, oauth_issuer,
+            email, email_verified, placeholder
         ) VALUES (
-            'Ms.', 'Sylvie', '', 'Jacquemot',
-            'sylvie.jacquemot', '$2a$10$1svMW3/FwE5G1BpE7/CPW.aMyEymEBeWK4tSTtABbsoo/KaSQ.vwm', 'Sylvie',
-            'sylvie.jacquemot.oauthsub', 'dummy-refresh-token', 'dummy-access-token', 'dummy-issuer',
-            'female', 'French', '1990-01-01',
-            'Lasers4EU', 'Research', 'Lasers4EU HQ', 'Researcher',
-            'SJ@lasers4EU.proposal.demo', true, '', ''
+            'Ms.', 'Sylvie', 'Jacquemot', 'Sylvie',
+            'sylvie.jacquemot.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
+            'SJ@lasers4EU.proposal.demo', true, false
         );
 
         INSERT INTO role_user (role_id, user_id)
@@ -45,39 +33,27 @@ BEGIN
 
         -- Chris Gregory | role: user_officer
         INSERT INTO users (
-            user_title, firstname, middlename, lastname,
-            username, password, preferredname,
-            oidc_sub, oauth_refresh_token, oauth_access_token, oauth_issuer,
-            gender, nationality, birthdate,
-            organisation, department, organisation_address, position,
-            email, email_verified, telephone, telephone_alt
+            user_title, firstname, lastname, preferredname,
+            oidc_sub, oauth_refresh_token, oauth_issuer,
+            email, email_verified, placeholder
         ) VALUES (
-            'Mr.', 'Chris', '', 'Gregory',
-            'christopher.gregory', '$2a$10$1svMW3/FwE5G1BpE7/CPW.aMyEymEBeWK4tSTtABbsoo/KaSQ.vwm', 'Chris',
-            'christopher.gregory.oauthsub', 'dummy-refresh-token', 'dummy-access-token', 'dummy-issuer',
-            'male', 'British', '1985-06-15',
-            'STFC', 'Scientific Computing', 'Rutherford Appleton Laboratory, Harwell, OX11 0QX', 'User Officer',
-            'christopher.gregory@stfc.ac.uk', true, '', ''
+            'Mr.', 'Chris', 'Gregory', 'Chris',
+            'christopher.gregory.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
+            'christopher.gregory@stfc.ac.uk', true, false
         );
 
         INSERT INTO role_user (role_id, user_id)
         SELECT 2, user_id FROM users WHERE email = 'christopher.gregory@stfc.ac.uk';
 
-        -- Lasers4EU Admin | role: user_officer | password: L4EU_officer
+        -- Lasers4EU Admin | role: user_officer
         INSERT INTO users (
-            user_title, firstname, middlename, lastname,
-            username, password, preferredname,
-            oidc_sub, oauth_refresh_token, oauth_access_token, oauth_issuer,
-            gender, nationality, birthdate,
-            organisation, department, organisation_address, position,
-            email, email_verified, telephone, telephone_alt
+            user_title, firstname, lastname, preferredname,
+            oidc_sub, oauth_refresh_token, oauth_issuer,
+            email, email_verified, placeholder
         ) VALUES (
-            'Mr.', 'Lasers4EU', '', 'Admin',
-            'l4eu_officer', '$2b$10$Od0SFWmosrSrC.j4v7E3qOncKDM.SwwmhvmBQDpx0jCbsqlG77ZU6', 'L4EU Admin',
-            'l4eu.officer.oauthsub', 'dummy-refresh-token', 'dummy-access-token', 'dummy-issuer',
-            'other', 'Other', '2000-01-01',
-            'Lasers4EU', 'Administration', 'Lasers4EU HQ', 'Administrator',
-            'User_Officer@lasers4EU.proposal.demo', true, '', ''
+            'Mr.', 'Lasers4EU', 'Admin', 'L4EU Admin',
+            'l4eu.officer.oauthsub', 'dummy-refresh-token', 'dummy-issuer',
+            'User_Officer@lasers4EU.proposal.demo', true, false
         );
 
         INSERT INTO role_user (role_id, user_id)
